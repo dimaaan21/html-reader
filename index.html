@@ -5,11 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>HTML-reader</title>
-    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <input type="file" onchange="readFile(this)" />
     <div id="fileContent"></div>
-    <script src="./script.js"></script>
+
+    <!--  -->
+    <script>
+      function readFile(input) {
+        const file = input.files[0];
+
+        const reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = () => (fileContent.innerHTML = reader.result);
+        reader.onerror = () =>
+          (fileContent.innerHTML = 'Ошибка чтения файла!\n' + reader.error);
+      }
+    </script>
   </body>
 </html>
